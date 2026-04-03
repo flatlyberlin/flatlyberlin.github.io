@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="853.33331"
+   height="853.33331"
+   viewBox="0 0 853.33331 853.33331"
+   sodipodi:docname="icon.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="true"
+     inkscape:zoom="0.36460194"
+     inkscape:cx="370.26681"
+     inkscape:cy="623.96815"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Flatly"
+     id="g1">
+    <circle
+       style="fill:#afeedd;fill-opacity:1;stroke-width:1.52778"
+       id="path1"
+       cx="426.66666"
+       cy="426.66666"
+       r="426.66666" />
+    <text
+       xml:space="preserve"
+       style="font-size:74.6667px;writing-mode:lr-tb;direction:ltr;fill:#567071;fill-opacity:1"
+       x="513.72546"
+       y="479.33331"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="513.72546"
+         y="479.33331"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.6667px;font-family:'System Font';-inkscape-font-specification:'System Font Bold'">ATLY</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:149.333px;writing-mode:lr-tb;direction:ltr;fill:#567071;fill-opacity:1"
+       x="198.87158"
+       y="684.69153"
+       id="text2-8"><tspan
+         sodipodi:role="line"
+         id="tspan2-9"
+         x="198.87158"
+         y="684.69153"
+         style="font-style:normal;font-variant:normal;font-weight:590;font-stretch:normal;font-size:149.333px;font-family:'System Font';-inkscape-font-specification:'System Font weight=590'">BERLIN</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#567071;stroke-width:55;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 231.47924,525.97305 V 161.19167 h 235.87367 v 364.78138 h 194.73292"
+       id="path3"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#567071;stroke-width:55;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       d="M 231.47924,343.58236 H 396.04226"
+       id="path4" />
+  </g>
+</svg>

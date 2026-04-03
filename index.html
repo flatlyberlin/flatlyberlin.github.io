@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags - English -->
+    <title lang="en">Flatly Berlin - Telegram Bot for Instant Apartment Alerts | Find Flats in Berlin</title>
+    <title lang="de">Flatly Berlin - Telegram Bot für sofortige Wohnungs-Alerts | Wohnungssuche Berlin</title>
+    <meta name="description" lang="en" content="Find apartments in Berlin faster with Flatly. Real-time Telegram bot alerts for new flat listings matching your budget, districts, and preferences. 10-day free trial.">
+    <meta name="description" lang="de" content="Finde schneller eine Wohnung in Berlin mit Flatly. Sofortige Telegram-Benachrichtigungen für neue Anzeigen passend zu deinem Budget und Bezirken. 10 Tage kostenlos testen.">
+    <meta name="keywords" content="Berlin apartment bot, Berlin flat finder, Wohnung Berlin, Wohnungssuche Berlin, Telegram Bot Wohnung, Berlin apartment search, Berlin immo, Mietwohnung Berlin, apartment alerts Berlin">
+    <meta name="author" content="Flatly Berlin">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://flatly-berlin.de/">
+    
+    <!-- Hreflang for SEO -->
+    <link rel="alternate" hreflang="en" href="https://flatly-berlin.de/?lang=en">
+    <link rel="alternate" hreflang="de" href="https://flatly-berlin.de/?lang=de">
+    <link rel="alternate" hreflang="x-default" href="https://flatly-berlin.de/">
+    
+    <!-- Open Graph / Facebook - Bilingual -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://flatly-berlin.de/">
+    <meta property="og:title" content="Flatly Berlin - Instant Apartment Alerts for Berlin">
+    <meta property="og:description" content="Get notified instantly when new apartments matching your criteria appear in Berlin. Never miss a flat again.">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="de_DE">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://flatly-berlin.de/">
+    <meta property="twitter:title" content="Flatly Berlin - Apartment Alert Bot">
+    <meta property="twitter:description" content="Real-time Berlin apartment alerts via Telegram. Be first to contact landlords.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Schema.org Structured Data - Software Application EN -->
+    <script type="application/ld+json" class="schema-lang-en">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Flatly Berlin",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Telegram",
+        "offers": {
+            "@type": "Offer",
+            "price": "5.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "description": "10-day free trial, then €5 every 30 days"
+        },
+        "description": "Telegram bot providing real-time apartment alerts for Berlin. Monitors major listing sites and notifies users instantly when new flats match their criteria.",
+        "url": "https://t.me/flatly_berlin_bot",
+        "availableLanguage": ["English", "German"]
+    }
+    </script>
+    
+    <!-- Schema.org Structured Data - Software Application DE -->
+    <script type="application/ld+json" class="schema-lang-de">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Flatly Berlin",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Telegram",
+        "offers": {
+            "@type": "Offer",
+            "price": "5.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "description": "10 Tage kostenlos testen, dann 5€ alle 30 Tage"
+        },
+        "description": "Telegram-Bot für Echtzeit-Wohnungs-Alerts in Berlin. Überwacht große Immobilienportale und benachrichtigt sofort bei passenden Anzeigen.",
+        "url": "https://t.me/flatly_berlin_bot",
+        "availableLanguage": ["English", "German"]
+    }
+    </script>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="280 130 300 420" width="28" height="28" aria-hidden="true" fill="none" stroke="#4fc9c8" stroke-width="55" stroke-linecap="round">
+                    <path d="M 316.5,525.97 V 161.19 h 150.85 v 364.78 h 79.54" />
+                    <path d="M 316.5,316.08 H 385.07" />
+                </svg>
+                <span class="logo-text">Flatly</span>
+            </div>
+            <div class="nav-controls">
+                <button class="lang-switcher" id="langToggle" aria-label="Switch language">
+                    <span class="lang-option active" data-lang="en">EN</span>
+                    <span class="lang-divider">/</span>
+                    <span class="lang-option" data-lang="de">DE</span>
+                </button>
+                <a href="https://t.me/flatly_berlin_bot" class="btn btn-small" target="_blank" rel="noopener noreferrer">
+                    <span class="lang-en">Open Bot</span>
+                    <span class="lang-de">Bot Öffnen</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" role="banner">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="lang-en">Berlin Housing Market</span>
+                    <span class="lang-de">Berliner Wohnungsmarkt</span>
+                </div>
+                <h1 class="headline">
+                    <span class="lang-en">Instant apartment alerts.<br><span class="highlight">Your perfect home awaits.</span></span>
+                    <span class="lang-de">Sofortige Wohnungs-Alerts.<br><span class="highlight">Deine perfekte Wohnung wartet.</span></span>
+                </h1>
+                <p class="subheadline">
+                    <span class="lang-en">Find apartments in Berlin faster with real-time Telegram notifications. Be the first to contact landlords when new flats matching your budget and preferences appear.</span>
+                    <span class="lang-de">Finde schneller eine Wohnung in Berlin mit Echtzeit-Telegram-Benachrichtigungen. Sei der Erste, der Vermieter kontaktiert, wenn neue Anzeigen erscheinen.</span>
+                </p>
+                <div class="cta-group">
+                    <a href="https://t.me/flatly_berlin_bot" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                        <span class="lang-en">Start on Telegram</span>
+                        <span class="lang-de">Auf Telegram Starten</span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                    <span class="trial-note">
+                        <span class="lang-en">10-day free trial</span>
+                        <span class="lang-de">10 Tage kostenlos testen</span>
+                    </span>
+                </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="alert-card">
+                    <div class="alert-header">
+                        <span class="dot"></span>
+                        <span class="alert-title">
+                            <span class="lang-en">New Match Found</span>
+                            <span class="lang-de">Neue Wohnung Gefunden</span>
+                        </span>
+                        <span class="time">
+                            <span class="lang-en">Just now</span>
+                            <span class="lang-de">Gerade eben</span>
+                        </span>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-line alert-line-1"></div>
+                        <div class="alert-line alert-line-2"></div>
+                        <div class="alert-meta">
+                            <span>Prenzlauer Berg</span>
+                            <span>850€</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-pattern"></div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="lang-en">Why Use Flatly for Your Berlin Apartment Search?</span>
+                    <span class="lang-de">Warum Flatly für deine Wohnungssuche?</span>
+                </h2>
+                <div class="grid">
+                    <article class="feature-card">
+                        <div class="feature-number" aria-hidden="true">01</div>
+                        <h3>
+                            <span class="lang-en">Real-Time Alerts</span>
+                            <span class="lang-de">Echtzeit-Benachrichtigungen</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Our Berlin apartment bot scans listings 24/7. The instant a flat matching your criteria appears, you receive a Telegram notification.</span>
+                            <span class="lang-de">Unser Bot scannt Anzeigen 24/7. Sobald eine passende Wohnung erscheint, erhältst du sofort eine Telegram-Nachricht.</span>
+                        </p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-number" aria-hidden="true">02</div>
+                        <h3>
+                            <span class="lang-en">First Access</span>
+                            <span class="lang-de">Erster Zugang</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Be first to contact landlords. In Berlin's competitive rental market, response time is critical.</span>
+                            <span class="lang-de">Sei der Erste, der Vermieter kontaktiert. Auf dem angespannten Berliner Markt zählt jede Minute.</span>
+                        </p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-number" aria-hidden="true">03</div>
+                        <h3>
+                            <span class="lang-en">Smart Filters</span>
+                            <span class="lang-de">Intelligente Filter</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Set your preferred Berlin districts (Bezirke), budget range, apartment size, and room count. Only receive alerts for flats that actually fit.</span>
+                            <span class="lang-de">Wähle deine Bezirke, Preisspanne, Wohnungsgröße und Zimmeranzahl. Erhalte nur Alerts für passende Anzeigen.</span>
+                        </p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-number" aria-hidden="true">04</div>
+                        <h3>
+                            <span class="lang-en">All Major Providers</span>
+                            <span class="lang-de">Alle Großen Portale</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">We monitor all major Berlin apartment listing sites so you don't have to check multiple platforms manually.</span>
+                            <span class="lang-de">Wir überwachen alle großen Immobilienportale, damit du nicht mehrere Webseiten manuell prüfen musst.</span>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="lang-en">How the Berlin Flat Finder Works</span>
+                    <span class="lang-de">So Funktioniert die Wohnungssuche</span>
+                </h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-marker">1</div>
+                        <h3>
+                            <span class="lang-en">Setup</span>
+                            <span class="lang-de">Einrichten</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Start the Telegram bot and configure your preferences: districts, budget, size, and requirements.</span>
+                            <span class="lang-de">Starte den Bot und konfiguriere deine Suche: Bezirke, Budget, Größe und Wünsche.</span>
+                        </p>
+                    </div>
+                    <div class="step-connector" aria-hidden="true"></div>
+                    <div class="step">
+                        <div class="step-marker">2</div>
+                        <h3>
+                            <span class="lang-en">Monitor</span>
+                            <span class="lang-de">Überwachen</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Our system scans the Berlin housing market continuously while you carry on with your day.</span>
+                            <span class="lang-de">Unser System scannt den Markt durchgehend, während du deinen Alltag lebst.</span>
+                        </p>
+                    </div>
+                    <div class="step-connector" aria-hidden="true"></div>
+                    <div class="step">
+                        <div class="step-marker">3</div>
+                        <h3>
+                            <span class="lang-en">Alert</span>
+                            <span class="lang-de">Benachrichtigung</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Receive instant notification when we find a matching flat. Click through and contact immediately.</span>
+                            <span class="lang-de">Erhalte sofortige Benachrichtigung bei Treffern. Klicke durch und kontaktiere sofort.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="lang-en">Frequently Asked Questions About Finding Flats in Berlin</span>
+                    <span class="lang-de">Häufige Fragen zur Wohnungssuche in Berlin</span>
+                </h2>
+                <div class="faq-grid">
+                    <article class="faq-item">
+                        <h4>
+                            <span class="lang-en">Why am I not receiving any alerts yet?</span>
+                            <span class="lang-de">Warum erhalte ich noch keine Benachrichtigungen?</span>
+                        </h4>
+                        <p>
+                            <span class="lang-en">Flatly only sends alerts for actual matching listings. Some providers update in batches at specific times. Weekends and evenings may have fewer updates.</span>
+                            <span class="lang-de">Flatly sendet nur Alerts für tatsächlich passende Anzeigen. Manche Portale aktualisieren zeitverzögert. An Wochenenden gibt es oft weniger neue Anzeigen.</span>
+                        </p>
+                    </article>
+                    <article class="faq-item">
+                        <h4>
+                            <span class="lang-en">Why did the alerts stop coming?</span>
+                            <span class="lang-de">Warum sind die Alerts ausgeblieben?</span>
+                        </h4>
+                        <p>
+                            <span class="lang-en">Check with /start command - you may have paused alerts. Alternatively, your 10-day trial period might have expired.</span>
+                            <span class="lang-de">Prüfe mit /start - möglicherweise hast du die Alerts pausiert. Oder deine 10-tägige Testphase ist abgelaufen.</span>
+                        </p>
+                    </article>
+                    <article class="faq-item">
+                        <h4>
+                            <span class="lang-en">How can I get more apartment results?</span>
+                            <span class="lang-de">Wie bekomme ich mehr Suchergebnisse?</span>
+                        </h4>
+                        <p>
+                            <span class="lang-en">Use /start to add more Berlin districts, include additional providers, or increase your budget range.</span>
+                            <span class="lang-de">Nutze /start, um mehr Bezirke hinzuzufügen, weitere Portale einzuschließen oder dein Budget zu erhöhen.</span>
+                        </p>
+                    </article>
+                    <article class="faq-item">
+                        <h4>
+                            <span class="lang-en">Is the service really instant?</span>
+                            <span class="lang-de">Ist der Service wirklich sofort?</span>
+                        </h4>
+                        <p>
+                            <span class="lang-en">Yes. Our system monitors listings in real-time and pushes notifications immediately upon detection of a matching apartment.</span>
+                            <span class="lang-de">Ja. Unser System überwacht Anzeigen in Echtzeit und sendet sofort Benachrichtigungen bei passenden Wohnungen.</span>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>
+                            <span class="lang-en">Simple Pricing for Berlin Apartment Hunters</span>
+                            <span class="lang-de">Einfache Preise für Wohnungssuchende</span>
+                        </h3>
+                        <div class="price">
+                            <span class="currency">€</span>
+                            <span class="amount">5</span>
+                            <span class="period">
+                                <span class="lang-en">/ 30 days</span>
+                                <span class="lang-de">/ 30 Tage</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pricing-features">
+                        <div class="pricing-row">
+                            <span class="check" aria-hidden="true">✓</span>
+                            <span>
+                                <span class="lang-en">10-day free trial</span>
+                                <span class="lang-de">10 Tage kostenlos testen</span>
+                            </span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="check" aria-hidden="true">✓</span>
+                            <span>
+                                <span class="lang-en">Unlimited alerts</span>
+                                <span class="lang-de">Unbegrenzte Benachrichtigungen</span>
+                            </span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="check" aria-hidden="true">✓</span>
+                            <span>
+                                <span class="lang-en">All providers included</span>
+                                <span class="lang-de">Alle Portale inklusive</span>
+                            </span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="check" aria-hidden="true">✓</span>
+                            <span>
+                                <span class="lang-en">Cancel anytime</span>
+                                <span class="lang-de">Jederzeit kündbar</span>
+                            </span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/flatly_berlin_bot" class="btn btn-large" target="_blank" rel="noopener noreferrer">
+                        <span class="lang-en">Get Started</span>
+                        <span class="lang-de">Jetzt Starten</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-text">Flatly Berlin</span>
+                    <p>
+                        <span class="lang-en">Never miss a perfect apartment again.</span>
+                        <span class="lang-de">Verpasse nie wieder die perfekte Wohnung.</span>
+                    </p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="https://t.me/flatly_berlin_bot" target="_blank" rel="noopener noreferrer">
+                        <span class="lang-en">Open Bot</span>
+                        <span class="lang-de">Bot Öffnen</span>
+                    </a>
+                    <a href="https://t.me/flatly_berlin_bot?start=support" target="_blank" rel="noopener noreferrer">
+                        <span class="lang-en">Support</span>
+                        <span class="lang-de">Hilfe</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    <span class="lang-en">&copy; 2026 Flatly Berlin. Independent service for Berlin apartment search.</span>
+                    <span class="lang-de">&copy; 2026 Flatly Berlin. Unabhängiger Service für Wohnungssuchende in Berlin.</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language Detection and Switching
+        (function() {
+            const supportedLanguages = ['en', 'de'];
+            const defaultLang = 'en';
+            
+            // Get browser language
+            function getBrowserLanguage() {
+                const navLang = navigator.language || navigator.userLanguage;
+                const primaryLang = navLang.split('-')[0];
+                return supportedLanguages.includes(primaryLang) ? primaryLang : defaultLang;
+            }
+            
+            // Get saved preference or URL parameter
+            function getCurrentLanguage() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlLang = urlParams.get('lang');
+                const savedLang = localStorage.getItem('flatly-language');
+                
+                if (urlLang && supportedLanguages.includes(urlLang)) {
+                    return urlLang;
+                }
+                if (savedLang && supportedLanguages.includes(savedLang)) {
+                    return savedLang;
+                }
+                return getBrowserLanguage();
+            }
+            
+            // Apply language
+            function setLanguage(lang) {
+                document.documentElement.lang = lang;
+                document.body.setAttribute('data-lang', lang);
+                
+                // Toggle visibility
+                document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.querySelectorAll('.lang-' + lang).forEach(el => {
+                    el.style.display = 'inline';
+                });
+                
+                // Update toggle UI
+                document.querySelectorAll('.lang-option').forEach(opt => {
+                    opt.classList.toggle('active', opt.dataset.lang === lang);
+                });
+                
+                // Save preference
+                localStorage.setItem('flatly-language', lang);
+                
+                // Update URL without reload
+                const url = new URL(window.location);
+                url.searchParams.set('lang', lang);
+                window.history.replaceState({}, '', url);
+            }
+            
+            // Initialize
+            const currentLang = getCurrentLanguage();
+            setLanguage(currentLang);
+            
+            // Toggle handler
+            document.getElementById('langToggle').addEventListener('click', function() {
+                const newLang = document.body.getAttribute('data-lang') === 'en' ? 'de' : 'en';
+                setLanguage(newLang);
+            });
+        })();
+    </script>
+</body>
+</html>
