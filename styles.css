@@ -93,7 +93,6 @@ body {
     color: var(--text-primary);
 }
 
-/* Buttons */
 .btn {
     display: inline-flex;
     align-items: center;
