@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /private/
-Sitemap: https://flatlyberlin.github.io/sitemap.xml
+Sitemap: https://flatly-berlin.de/sitemap.xml
