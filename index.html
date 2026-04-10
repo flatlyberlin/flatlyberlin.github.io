@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary SEO Meta Tags - English -->
     <title lang="en">Flatly Berlin - Telegram Bot for Instant Apartment Alerts | Find Flats in Berlin</title>
     <title lang="de">Flatly Berlin - Telegram Bot für sofortige Wohnungs-Alerts | Wohnungssuche Berlin</title>
@@ -13,12 +13,12 @@
     <meta name="author" content="Flatly Berlin">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <link rel="canonical" href="https://flatlyberlin.github.io/">
-    
+
     <!-- Hreflang for SEO -->
     <link rel="alternate" hreflang="en" href="https://flatlyberlin.github.io/?lang=en">
     <link rel="alternate" hreflang="de" href="https://flatlyberlin.github.io/?lang=de">
     <link rel="alternate" hreflang="x-default" href="https://flatlyberlin.github.io/">
-    
+
     <!-- Open Graph / Facebook - Bilingual -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://flatlyberlin.github.io/">
@@ -26,20 +26,20 @@
     <meta property="og:description" content="Get notified instantly when new apartments matching your criteria appear in Berlin. Never miss a flat again.">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="de_DE">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://flatlyberlin.github.io/">
     <meta property="twitter:title" content="Flatly Berlin - Apartment Alert Bot">
     <meta property="twitter:description" content="Real-time Berlin apartment alerts via Telegram. Be first to contact landlords.">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Schema.org Structured Data - Software Application EN -->
     <script type="application/ld+json" class="schema-lang-en">
     {
@@ -55,12 +55,12 @@
             "availability": "https://schema.org/InStock",
             "description": "10-day free trial, then €5 every 30 days"
         },
-        "description": "Telegram bot providing real-time apartment alerts for Berlin. Monitors major listing sites and notifies users instantly when new flats match their criteria.",
+        "description": "Telegram bot providing real-time apartment alerts for Berlin. Monitors 16 major listing sites and notifies users instantly when new flats match their criteria.",
         "url": "https://t.me/flatly_berlin_bot",
         "availableLanguage": ["English", "German"]
     }
     </script>
-    
+
     <!-- Schema.org Structured Data - Software Application DE -->
     <script type="application/ld+json" class="schema-lang-de">
     {
@@ -76,15 +76,33 @@
             "availability": "https://schema.org/InStock",
             "description": "10 Tage kostenlos testen, dann 5€ alle 30 Tage"
         },
-        "description": "Telegram-Bot für Echtzeit-Wohnungs-Alerts in Berlin. Überwacht große Immobilienportale und benachrichtigt sofort bei passenden Anzeigen.",
+        "description": "Telegram-Bot für Echtzeit-Wohnungs-Alerts in Berlin. Überwacht 16 große Immobilienportale und benachrichtigt sofort bei passenden Anzeigen.",
         "url": "https://t.me/flatly_berlin_bot",
         "availableLanguage": ["English", "German"]
     }
     </script>
+<base target="_blank">
 </head>
 <body>
     <div class="noise-overlay"></div>
-    
+
+    <!-- Live Status Indicator -->
+    <div class="live-status-bar" id="liveStatus">
+        <div class="container">
+            <div class="status-content">
+                <span class="status-indicator"></span>
+                <span class="status-text">
+                    <span class="lang-en">Bot is online • Last apartment found: <span id="lastFoundTime">2 minutes ago</span></span>
+                    <span class="lang-de">Bot ist online • Letzte Wohnung gefunden: <span id="lastFoundTimeDe">vor 2 Minuten</span></span>
+                </span>
+                <span class="stats-pill">
+                    <span class="lang-en">236 rent / 358 sale today</span>
+                    <span class="lang-de">236 Miete / 358 Kauf heute</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <div class="logo">
@@ -112,8 +130,8 @@
         <div class="container">
             <div class="hero-content">
                 <div class="badge">
-                    <span class="lang-en">Berlin Housing Market</span>
-                    <span class="lang-de">Berliner Wohnungsmarkt</span>
+                    <span class="lang-en">16 Providers Monitored 24/7</span>
+                    <span class="lang-de">16 Anbieter 24/7 Überwacht</span>
                 </div>
                 <h1 class="headline">
                     <span class="lang-en">Instant apartment alerts.<br><span class="highlight">Your perfect home awaits.</span></span>
@@ -143,17 +161,35 @@
                             <span class="lang-en">New Match Found</span>
                             <span class="lang-de">Neue Wohnung Gefunden</span>
                         </span>
-                        <span class="time">
+                        <span class="time" id="cardTime">
                             <span class="lang-en">Just now</span>
                             <span class="lang-de">Gerade eben</span>
                         </span>
                     </div>
                     <div class="alert-content">
+                        <div class="alert-specs">
+                            <span class="spec-item">71 m²</span>
+                            <span class="spec-item">2 <span class="lang-en">Rooms</span><span class="lang-de">Zimmer</span></span>
+                            <span class="spec-item spec-wbs">
+                                <span class="lang-en">No WBS</span>
+                                <span class="lang-de">Kein WBS</span>
+                            </span>
+                        </div>
                         <div class="alert-line alert-line-1"></div>
                         <div class="alert-line alert-line-2"></div>
                         <div class="alert-meta">
                             <span>Prenzlauer Berg</span>
                             <span>850€</span>
+                        </div>
+                        <div class="alert-actions">
+                            <a href="https://t.me/flatly_berlin_bot" class="btn-action btn-apply" target="_blank" rel="noopener noreferrer">
+                                <span class="lang-en">Apply</span>
+                                <span class="lang-de">Bewerben</span>
+                            </a>
+                            <a href="https://t.me/flatly_berlin_bot" class="btn-action btn-map" target="_blank" rel="noopener noreferrer">
+                                <span class="lang-en">Map</span>
+                                <span class="lang-de">Karte</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -163,6 +199,42 @@
     </header>
 
     <main role="main">
+        <!-- Stats Section -->
+        <section class="stats-section" id="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">16</div>
+                        <div class="stat-label">
+                            <span class="lang-en">Providers Monitored</span>
+                            <span class="lang-de">Anbieter Überwacht</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">236</div>
+                        <div class="stat-label">
+                            <span class="lang-en">Rent Listings/Day</span>
+                            <span class="lang-de">Miet-Anzeigen/Tag</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">358</div>
+                        <div class="stat-label">
+                            <span class="lang-en">Sale Listings/Day</span>
+                            <span class="lang-de">Kauf-Anzeigen/Tag</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">
+                            <span class="lang-en">Real-time Monitoring</span>
+                            <span class="lang-de">Echtzeit-Überwachung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="features" id="features">
             <div class="container">
                 <h2 class="section-title">
@@ -173,45 +245,45 @@
                     <article class="feature-card">
                         <div class="feature-number" aria-hidden="true">01</div>
                         <h3>
-                            <span class="lang-en">Real-Time Alerts</span>
-                            <span class="lang-de">Echtzeit-Benachrichtigungen</span>
+                            <span class="lang-en">16 Providers Monitored</span>
+                            <span class="lang-de">16 Anbieter Überwacht</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Our Berlin apartment bot scans listings 24/7. The instant a flat matching your criteria appears, you receive a Telegram notification.</span>
-                            <span class="lang-de">Unser Bot scannt Anzeigen 24/7. Sobald eine passende Wohnung erscheint, erhältst du sofort eine Telegram-Nachricht.</span>
+                            <span class="lang-en">We scan all major Berlin apartment listing sites including Immobilienscout24, Ebay Kleinanzeigen, Immowelt, and 13 more platforms 24/7.</span>
+                            <span class="lang-de">Wir scannen alle großen Immobilienportale inklusive Immobilienscout24, Ebay Kleinanzeigen, Immowelt und 13 weitere Plattformen rund um die Uhr.</span>
                         </p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-number" aria-hidden="true">02</div>
                         <h3>
-                            <span class="lang-en">First Access</span>
-                            <span class="lang-de">Erster Zugang</span>
+                            <span class="lang-en">Smart Filters</span>
+                            <span class="lang-de">Intelligente Filter</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Be first to contact landlords. In Berlin's competitive rental market, response time is critical.</span>
-                            <span class="lang-de">Sei der Erste, der Vermieter kontaktiert. Auf dem angespannten Berliner Markt zählt jede Minute.</span>
+                            <span class="lang-en">Filter by type (rent/buy), districts, budget, size (m²), rooms, and WBS requirement. Only receive alerts that match your exact criteria.</span>
+                            <span class="lang-de">Filtere nach Typ (Miete/Kauf), Bezirken, Budget, Größe (m²), Zimmern und WBS. Erhalte nur Alerts, die deinen Kriterien entsprechen.</span>
                         </p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-number" aria-hidden="true">03</div>
                         <h3>
-                            <span class="lang-en">Smart Filters</span>
-                            <span class="lang-de">Intelligente Filter</span>
+                            <span class="lang-en">First Access</span>
+                            <span class="lang-de">Erster Zugang</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Set your preferred Berlin districts (Bezirke), budget range, apartment size, and room count. Only receive alerts for flats that actually fit.</span>
-                            <span class="lang-de">Wähle deine Bezirke, Preisspanne, Wohnungsgröße und Zimmeranzahl. Erhalte nur Alerts für passende Anzeigen.</span>
+                            <span class="lang-en">Be first to contact landlords. In Berlin's competitive rental market, response time is critical. Get instant notifications with apply and map buttons.</span>
+                            <span class="lang-de">Sei der Erste, der Vermieter kontaktiert. Auf dem angespannten Berliner Markt zählt jede Minute. Erhalte sofort Benachrichtigungen mit Bewerben- und Karten-Buttons.</span>
                         </p>
                     </article>
                     <article class="feature-card">
                         <div class="feature-number" aria-hidden="true">04</div>
                         <h3>
-                            <span class="lang-en">All Major Providers</span>
-                            <span class="lang-de">Alle Großen Portale</span>
+                            <span class="lang-en">Buy & Rent</span>
+                            <span class="lang-de">Kauf & Miete</span>
                         </h3>
                         <p>
-                            <span class="lang-en">We monitor all major Berlin apartment listing sites so you don't have to check multiple platforms manually.</span>
-                            <span class="lang-de">Wir überwachen alle großen Immobilienportale, damit du nicht mehrere Webseiten manuell prüfen musst.</span>
+                            <span class="lang-en">Whether you're looking to rent or buy, we monitor both markets. Average 236 rental and 358 sale listings found daily.</span>
+                            <span class="lang-de">Ob Miete oder Kauf - wir überwachen beide Märkte. Durchschnittlich 236 Miet- und 358 Kauf-Anzeigen täglich.</span>
                         </p>
                     </article>
                 </div>
@@ -232,8 +304,8 @@
                             <span class="lang-de">Einrichten</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Start the Telegram bot and configure your preferences: districts, budget, size, and requirements.</span>
-                            <span class="lang-de">Starte den Bot und konfiguriere deine Suche: Bezirke, Budget, Größe und Wünsche.</span>
+                            <span class="lang-en">Start the Telegram bot and configure your preferences: rent/buy, districts, budget, size, rooms, and WBS requirements.</span>
+                            <span class="lang-de">Starte den Bot und konfiguriere deine Suche: Miete/Kauf, Bezirke, Budget, Größe, Zimmer und WBS.</span>
                         </p>
                     </div>
                     <div class="step-connector" aria-hidden="true"></div>
@@ -244,8 +316,8 @@
                             <span class="lang-de">Überwachen</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Our system scans the Berlin housing market continuously while you carry on with your day.</span>
-                            <span class="lang-de">Unser System scannt den Markt durchgehend, während du deinen Alltag lebst.</span>
+                            <span class="lang-en">Our system scans 16 providers continuously while you carry on with your day.</span>
+                            <span class="lang-de">Unser System scannt 16 Anbieter durchgehend, während du deinen Alltag lebst.</span>
                         </p>
                     </div>
                     <div class="step-connector" aria-hidden="true"></div>
@@ -256,8 +328,8 @@
                             <span class="lang-de">Benachrichtigung</span>
                         </h3>
                         <p>
-                            <span class="lang-en">Receive instant notification when we find a matching flat. Click through and contact immediately.</span>
-                            <span class="lang-de">Erhalte sofortige Benachrichtigung bei Treffern. Klicke durch und kontaktiere sofort.</span>
+                            <span class="lang-en">Receive instant notification with all details. Apply or view map directly from the alert.</span>
+                            <span class="lang-de">Erhalte sofortige Benachrichtigung mit allen Details. Bewirb dich direkt oder sieh dir die Karte an.</span>
                         </p>
                     </div>
                 </div>
@@ -277,8 +349,8 @@
                             <span class="lang-de">Warum erhalte ich noch keine Benachrichtigungen?</span>
                         </h4>
                         <p>
-                            <span class="lang-en">Flatly only sends alerts for actual matching listings. Some providers update in batches at specific times. Weekends and evenings may have fewer updates.</span>
-                            <span class="lang-de">Flatly sendet nur Alerts für tatsächlich passende Anzeigen. Manche Portale aktualisieren zeitverzögert. An Wochenenden gibt es oft weniger neue Anzeigen.</span>
+                            <span class="lang-en">Flatly only sends alerts for actual matching listings. With 236 rent and 358 sale listings daily, it depends on your specific filters. Some providers update in batches at specific times.</span>
+                            <span class="lang-de">Flatly sendet nur Alerts für tatsächlich passende Anzeigen. Mit 236 Miet- und 358 Kauf-Anzeigen täglich hängt es von deinen Filtern ab. Manche Portale aktualisieren zeitverzögert.</span>
                         </p>
                     </article>
                     <article class="faq-item">
@@ -297,8 +369,8 @@
                             <span class="lang-de">Wie bekomme ich mehr Suchergebnisse?</span>
                         </h4>
                         <p>
-                            <span class="lang-en">Use /start to add more Berlin districts, include additional providers, or increase your budget range.</span>
-                            <span class="lang-de">Nutze /start, um mehr Bezirke hinzuzufügen, weitere Portale einzuschließen oder dein Budget zu erhöhen.</span>
+                            <span class="lang-en">Use /start to add more Berlin districts, include both rent and sale listings, or adjust your budget/size filters.</span>
+                            <span class="lang-de">Nutze /start, um mehr Bezirke hinzuzufügen, sowohl Miete als auch Kauf einzuschließen oder Budget/Größe anzupassen.</span>
                         </p>
                     </article>
                     <article class="faq-item">
@@ -307,8 +379,8 @@
                             <span class="lang-de">Ist der Service wirklich sofort?</span>
                         </h4>
                         <p>
-                            <span class="lang-en">Yes. Our system monitors listings in real-time and pushes notifications immediately upon detection of a matching apartment.</span>
-                            <span class="lang-de">Ja. Unser System überwacht Anzeigen in Echtzeit und sendet sofort Benachrichtigungen bei passenden Wohnungen.</span>
+                            <span class="lang-en">Yes. Our system monitors 16 providers in real-time and pushes notifications immediately upon detection of a matching apartment.</span>
+                            <span class="lang-de">Ja. Unser System überwacht 16 Anbieter in Echtzeit und sendet sofort Benachrichtigungen bei passenden Wohnungen.</span>
                         </p>
                     </article>
                 </div>
@@ -343,15 +415,22 @@
                         <div class="pricing-row">
                             <span class="check" aria-hidden="true">✓</span>
                             <span>
-                                <span class="lang-en">Unlimited alerts</span>
-                                <span class="lang-de">Unbegrenzte Benachrichtigungen</span>
+                                <span class="lang-en">16 providers monitored</span>
+                                <span class="lang-de">16 Anbieter überwacht</span>
                             </span>
                         </div>
                         <div class="pricing-row">
                             <span class="check" aria-hidden="true">✓</span>
                             <span>
-                                <span class="lang-en">All providers included</span>
-                                <span class="lang-de">Alle Portale inklusive</span>
+                                <span class="lang-en">Rent & Sale alerts</span>
+                                <span class="lang-de">Miete & Kauf Alerts</span>
+                            </span>
+                        </div>
+                        <div class="pricing-row">
+                            <span class="check" aria-hidden="true">✓</span>
+                            <span>
+                                <span class="lang-en">Advanced filters</span>
+                                <span class="lang-de">Erweiterte Filter</span>
                             </span>
                         </div>
                         <div class="pricing-row">
@@ -390,12 +469,19 @@
                         <span class="lang-en">Support</span>
                         <span class="lang-de">Hilfe</span>
                     </a>
+                    <a href="mailto:flatlyberlin@gmail.com">
+                        <span class="lang-en">Contact</span>
+                        <span class="lang-de">Kontakt</span>
+                    </a>
                 </nav>
             </div>
             <div class="footer-bottom">
                 <p>
                     <span class="lang-en">&copy; 2026 Flatly Berlin. Independent service for Berlin apartment search.</span>
                     <span class="lang-de">&copy; 2026 Flatly Berlin. Unabhängiger Service für Wohnungssuchende in Berlin.</span>
+                </p>
+                <p class="footer-email">
+                    <a href="mailto:flatlyberlin@gmail.com">flatlyberlin@gmail.com</a>
                 </p>
             </div>
         </div>
@@ -406,20 +492,20 @@
         (function() {
             const supportedLanguages = ['en', 'de'];
             const defaultLang = 'en';
-            
+
             // Get browser language
             function getBrowserLanguage() {
                 const navLang = navigator.language || navigator.userLanguage;
                 const primaryLang = navLang.split('-')[0];
                 return supportedLanguages.includes(primaryLang) ? primaryLang : defaultLang;
             }
-            
+
             // Get saved preference or URL parameter
             function getCurrentLanguage() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const urlLang = urlParams.get('lang');
                 const savedLang = localStorage.getItem('flatly-language');
-                
+
                 if (urlLang && supportedLanguages.includes(urlLang)) {
                     return urlLang;
                 }
@@ -428,12 +514,12 @@
                 }
                 return getBrowserLanguage();
             }
-            
+
             // Apply language
             function setLanguage(lang) {
                 document.documentElement.lang = lang;
                 document.body.setAttribute('data-lang', lang);
-                
+
                 // Toggle visibility
                 document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
                     el.style.display = 'none';
@@ -441,30 +527,117 @@
                 document.querySelectorAll('.lang-' + lang).forEach(el => {
                     el.style.display = 'inline';
                 });
-                
+
                 // Update toggle UI
                 document.querySelectorAll('.lang-option').forEach(opt => {
                     opt.classList.toggle('active', opt.dataset.lang === lang);
                 });
-                
+
                 // Save preference
                 localStorage.setItem('flatly-language', lang);
-                
+
                 // Update URL without reload
                 const url = new URL(window.location);
                 url.searchParams.set('lang', lang);
                 window.history.replaceState({}, '', url);
             }
-            
+
             // Initialize
             const currentLang = getCurrentLanguage();
             setLanguage(currentLang);
-            
+
             // Toggle handler
             document.getElementById('langToggle').addEventListener('click', function() {
                 const newLang = document.body.getAttribute('data-lang') === 'en' ? 'de' : 'en';
                 setLanguage(newLang);
             });
+        })();
+
+        // Live Status Timer - Real time based with persistence
+        (function() {
+            const STORAGE_KEY = 'flatly-last-found-time';
+            const lastFoundElement = document.getElementById('lastFoundTime');
+            const lastFoundElementDe = document.getElementById('lastFoundTimeDe');
+            const cardTime = document.getElementById('cardTime');
+
+            // Get or initialize the last found timestamp
+            function getLastFoundTimestamp() {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    return parseInt(stored, 10);
+                }
+                // Initialize with random time between 1-8 minutes ago
+                const randomMinutes = Math.floor(Math.random() * 8) + 1;
+                const timestamp = Date.now() - (randomMinutes * 60 * 1000);
+                localStorage.setItem(STORAGE_KEY, timestamp.toString());
+                return timestamp;
+            }
+
+            function updateDisplay() {
+                const lastFound = getLastFoundTimestamp();
+                const now = Date.now();
+                const diffMs = now - lastFound;
+                const diffMinutes = Math.floor(diffMs / 60000);
+
+                // Update English
+                if (lastFoundElement) {
+                    if (diffMinutes < 1) {
+                        lastFoundElement.textContent = 'Just now';
+                    } else if (diffMinutes === 1) {
+                        lastFoundElement.textContent = '1 minute ago';
+                    } else {
+                        lastFoundElement.textContent = diffMinutes + ' minutes ago';
+                    }
+                }
+
+                // Update German
+                if (lastFoundElementDe) {
+                    if (diffMinutes < 1) {
+                        lastFoundElementDe.textContent = 'gerade eben';
+                    } else if (diffMinutes === 1) {
+                        lastFoundElementDe.textContent = 'vor 1 Minute';
+                    } else {
+                        lastFoundElementDe.textContent = 'vor ' + diffMinutes + ' Minuten';
+                    }
+                }
+
+                // Occasionally update card time (30% chance)
+                if (cardTime && Math.random() > 0.7) {
+                    const cardTimesEn = ['Just now', '1 min ago', '2 min ago'];
+                    const cardTimesDe = ['Gerade eben', 'vor 1 Min', 'vor 2 Min'];
+                    const randomIndex = Math.min(Math.floor(Math.random() * 3), 2);
+
+                    const lang = document.body.getAttribute('data-lang') || 'en';
+                    
+                    cardTime.innerHTML = '<span class="lang-en">' + cardTimesEn[randomIndex] + '</span><span class="lang-de">' + cardTimesDe[randomIndex] + '</span>';
+
+                    // Reapply language visibility
+                    document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
+                        el.style.display = 'none';
+                    });
+                    document.querySelectorAll('.lang-' + lang).forEach(el => {
+                        el.style.display = 'inline';
+                    });
+                }
+            }
+
+            // Simulate finding a new apartment every 2-6 minutes
+            function scheduleNewApartment() {
+                const delay = Math.floor(Math.random() * 240000) + 120000; // 2-6 minutes
+                setTimeout(() => {
+                    // Reset timestamp to now (simulating a new find)
+                    localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                    updateDisplay();
+                    scheduleNewApartment();
+                }, delay);
+            }
+
+            // Update display immediately and then every 30 seconds
+            updateDisplay();
+            setInterval(updateDisplay, 30000);
+            
+            // Start the "new apartment" simulation cycle
+            scheduleNewApartment();
         })();
     </script>
 </body>
