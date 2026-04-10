@@ -467,6 +467,16 @@ body {
     margin-bottom: 8px;
 }
 
+.avg-sign {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--accent-hover);
+    margin-right: 2px;
+    vertical-align: baseline;
+    position: relative;
+    top: -5px;
+}
+
 .stat-label {
     font-size: 0.875rem;
     color: var(--text-secondary);
@@ -892,6 +902,10 @@ body {
 
     .stat-number {
         font-size: 2rem;
+    }
+    
+    .avg-sign {
+        font-size: 1.4rem;
     }
 }
 
