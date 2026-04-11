@@ -588,38 +588,26 @@
             });
         })();
 
-        // Live Status Timer - Real time based with persistence
+        // Live Status Timer - Fixed: starts at "Just now" on every reload
         (function() {
-            const STORAGE_KEY = 'flatly-last-found-time';
             const lastFoundElement = document.getElementById('lastFoundTime');
             const lastFoundElementDe = document.getElementById('lastFoundTimeDe');
             const cardTime = document.getElementById('cardTime');
 
-            // Get or initialize the last found timestamp
-            function getLastFoundTimestamp() {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                if (stored) {
-                    return parseInt(stored, 10);
-                }
-                // Initialize with random time between 1-8 minutes ago
-                const randomMinutes = Math.floor(Math.random() * 8) + 1;
-                const timestamp = Date.now() - (randomMinutes * 60 * 1000);
-                localStorage.setItem(STORAGE_KEY, timestamp.toString());
-                return timestamp;
-            }
+            // FIXED: Removed random offset - timer starts at 0 on every page load
+            // This ensures consistent behavior: always starts at "Just now" and increments smoothly
+            const cycleDuration = 300000; // 5 minutes in milliseconds
+            const startTime = Date.now();
 
             function updateDisplay() {
-                const lastFound = getLastFoundTimestamp();
-                const now = Date.now();
-                const diffMs = now - lastFound;
-                const diffMinutes = Math.floor(diffMs / 60000);
+                // Calculate elapsed time since page load
+                const elapsed = Date.now() - startTime;
+                const diffMinutes = Math.floor(elapsed / 60000);
 
                 // Update English
                 if (lastFoundElement) {
                     if (diffMinutes < 1) {
                         lastFoundElement.textContent = 'Just now';
-                    } else if (diffMinutes === 1) {
-                        lastFoundElement.textContent = '1 minute ago';
                     } else {
                         lastFoundElement.textContent = diffMinutes + ' minutes ago';
                     }
@@ -629,51 +617,29 @@
                 if (lastFoundElementDe) {
                     if (diffMinutes < 1) {
                         lastFoundElementDe.textContent = 'gerade eben';
-                    } else if (diffMinutes === 1) {
-                        lastFoundElementDe.textContent = 'vor 1 Minute';
                     } else {
                         lastFoundElementDe.textContent = 'vor ' + diffMinutes + ' Minuten';
                     }
                 }
 
-                // Occasionally update card time (30% chance)
-                if (cardTime && Math.random() > 0.7) {
-                    const cardTimesEn = ['Just now', '1 min ago', '2 min ago'];
-                    const cardTimesDe = ['Gerade eben', 'vor 1 Min', 'vor 2 Min'];
-                    const randomIndex = Math.min(Math.floor(Math.random() * 3), 2);
-
-                    const lang = document.body.getAttribute('data-lang') || 'en';
+                // Update card time based on the same elapsed time
+                if (cardTime) {
+                    const cardTimesEn = ['Just now', '1 min ago', '2 min ago', '3 min ago', '4 min ago'];
+                    const cardTimesDe = ['Gerade eben', 'vor 1 Min', 'vor 2 Min', 'vor 3 Min', 'vor 4 Min'];
+                    const idx = Math.min(diffMinutes, 4);
                     
-                    cardTime.innerHTML = '<span class="lang-en">' + cardTimesEn[randomIndex] + '</span><span class="lang-de">' + cardTimesDe[randomIndex] + '</span>';
-
-                    // Reapply language visibility
-                    document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                    document.querySelectorAll('.lang-' + lang).forEach(el => {
-                        el.style.display = 'inline';
-                    });
+                    const langEnSpan = cardTime.querySelector('.lang-en');
+                    const langDeSpan = cardTime.querySelector('.lang-de');
+                    if (langEnSpan) langEnSpan.textContent = cardTimesEn[idx];
+                    if (langDeSpan) langDeSpan.textContent = cardTimesDe[idx];
                 }
             }
 
-            // Simulate finding a new apartment every 2-6 minutes
-            function scheduleNewApartment() {
-                const delay = Math.floor(Math.random() * 240000) + 120000; // 2-6 minutes
-                setTimeout(() => {
-                    // Reset timestamp to now (simulating a new find)
-                    localStorage.setItem(STORAGE_KEY, Date.now().toString());
-                    updateDisplay();
-                    scheduleNewApartment();
-                }, delay);
-            }
-
-            // Update display immediately and then every 30 seconds
+            // Update immediately, then every 10 seconds
             updateDisplay();
-            setInterval(updateDisplay, 30000);
-            
-            // Start the "new apartment" simulation cycle
-            scheduleNewApartment();
+            setInterval(updateDisplay, 10000);
         })();
+
     </script>
 </body>
 </html>
