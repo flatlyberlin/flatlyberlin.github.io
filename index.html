@@ -132,8 +132,10 @@
             <div class="status-content">
                 <span class="status-indicator"></span>
                 <span class="status-text">
-                    <span class="lang-en">Bot is online • Last apartment found: <span id="lastFoundTime">2 minutes ago</span></span>
-                    <span class="lang-de">Bot ist online • Letzte Wohnung gefunden: <span id="lastFoundTimeDe">vor 2 Minuten</span></span>
+                    <span class="status-text">
+                        <span class="lang-en">Bot is online</span>
+                        <span class="lang-de">Bot ist online</span>
+                    </span>
                 </span>
                 <span class="stats-pill" id="dailyStats">
                     <span class="lang-en"><span class="stat-rent">236</span> rent / <span class="stat-sale">358</span> sale yesterday</span>
@@ -200,10 +202,6 @@
                         <span class="alert-title">
                             <span class="lang-en">New Match Found</span>
                             <span class="lang-de">Neue Wohnung Gefunden</span>
-                        </span>
-                        <span class="time" id="cardTime">
-                            <span class="lang-en">Just now</span>
-                            <span class="lang-de">Gerade eben</span>
                         </span>
                     </div>
                     <div class="alert-content">
@@ -613,51 +611,6 @@
                 const newLang = document.body.getAttribute('data-lang') === 'en' ? 'de' : 'en';
                 setLanguage(newLang);
             });
-        })();
-
-        // Live Status Timer - Starts at "Just now" on every reload
-        (function() {
-            const lastFoundElement = document.getElementById('lastFoundTime');
-            const lastFoundElementDe = document.getElementById('lastFoundTimeDe');
-            const cardTime = document.getElementById('cardTime');
-
-            const cycleDuration = 300000;
-            const startTime = Date.now();
-
-            function updateDisplay() {
-                const elapsed = Date.now() - startTime;
-                const diffMinutes = Math.floor(elapsed / 60000);
-
-                if (lastFoundElement) {
-                    if (diffMinutes < 1) {
-                        lastFoundElement.textContent = 'Just now';
-                    } else {
-                        lastFoundElement.textContent = diffMinutes + ' minutes ago';
-                    }
-                }
-
-                if (lastFoundElementDe) {
-                    if (diffMinutes < 1) {
-                        lastFoundElementDe.textContent = 'gerade eben';
-                    } else {
-                        lastFoundElementDe.textContent = 'vor ' + diffMinutes + ' Minuten';
-                    }
-                }
-
-                if (cardTime) {
-                    const cardTimesEn = ['Just now', '1 min ago', '2 min ago', '3 min ago', '4 min ago'];
-                    const cardTimesDe = ['Gerade eben', 'vor 1 Min', 'vor 2 Min', 'vor 3 Min', 'vor 4 Min'];
-                    const idx = Math.min(diffMinutes, 4);
-                    
-                    const langEnSpan = cardTime.querySelector('.lang-en');
-                    const langDeSpan = cardTime.querySelector('.lang-de');
-                    if (langEnSpan) langEnSpan.textContent = cardTimesEn[idx];
-                    if (langDeSpan) langDeSpan.textContent = cardTimesDe[idx];
-                }
-            }
-
-            updateDisplay();
-            setInterval(updateDisplay, 10000);
         })();
     </script>
 </body>

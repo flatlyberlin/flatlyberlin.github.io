@@ -310,11 +310,6 @@ body {
     flex: 1;
 }
 
-.time {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-}
-
 .alert-content {
     position: relative;
 }
@@ -333,13 +328,6 @@ body {
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--text-secondary);
-}
-
-/* Subtle WBS tag styling */
-.spec-wbs {
-    background: var(--border);
-    color: var(--text-secondary);
-    font-weight: 500;
 }
 
 .alert-line {
