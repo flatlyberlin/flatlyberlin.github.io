@@ -14,7 +14,9 @@
     
     <meta name="author" content="Flatly Berlin">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <link rel="canonical" href="https://flatly-berlin.de/">
+    
+    <!-- Dynamic Canonical Tag (updated via JS below) -->
+    <link rel="canonical" href="https://flatly-berlin.de/" id="dynamic-canonical">
 
     <!-- Hreflang for SEO -->
     <link rel="alternate" hreflang="en" href="https://flatly-berlin.de/?lang=en">
@@ -123,6 +125,31 @@
         }]
     }
     </script>
+
+    <!-- JavaScript: Dynamic Canonical + Language Handling -->
+    <script>
+    (function() {
+        // Set canonical based on ?lang parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lang');
+        const canonicalEl = document.getElementById('dynamic-canonical');
+        
+        if (lang === 'en' || lang === 'de') {
+            canonicalEl.href = `https://flatly-berlin.de/?lang=${lang}`;
+            document.documentElement.setAttribute('lang', lang);
+            document.body.setAttribute('data-lang', lang);
+        } else {
+            document.documentElement.setAttribute('lang', 'en');
+            document.body.setAttribute('data-lang', 'en');
+        }
+
+        // Optional: Update OG/Twitter URLs dynamically too
+        const currentUrl = canonicalEl.href;
+        document.querySelector('meta[property="og:url"]')?.setAttribute('content', currentUrl);
+        document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', currentUrl);
+    })();
+    </script>
+
 <base target="_blank">
 </head>
 <body>
