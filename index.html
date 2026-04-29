@@ -3,48 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Primary SEO Meta Tags - Optimized for target keywords -->
     <title>Berlin Apartment Bot | Automatic Flat Finder via Telegram - Flatly</title>
     <meta name="description" content="The #1 Berlin apartment bot. Automatic apartment finder scanning 16 platforms 24/7. Get instant Telegram notifications for new flats. 10-day free trial.">
     <meta name="keywords" content="berlin apartment bot, automatic apartment finder berlin, berlin flats bot, wohnungsbot berlin, automatische wohnungssuche, wohnungssuch bot berlin, telegram bot wohnung berlin, flat finder berlin, wohnungssuche automatisierung, apartment notifications berlin">
-    
-    <!-- German Meta -->
     <meta name="description" lang="de" content="Der beste Wohnungsbot für Berlin. Automatische Wohnungssuche über 16 Portale. Sofortige Telegram Benachrichtigungen. 10 Tage kostenlos testen.">
-    
     <meta name="author" content="Flatly Berlin">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    
-    <!-- Dynamic Canonical Tag (updated via JS below) -->
     <link rel="canonical" href="https://flatly-berlin.de/" id="dynamic-canonical">
-
-    <!-- Hreflang for SEO -->
     <link rel="alternate" hreflang="en" href="https://flatly-berlin.de/?lang=en">
     <link rel="alternate" hreflang="de" href="https://flatly-berlin.de/?lang=de">
     <link rel="alternate" hreflang="x-default" href="https://flatly-berlin.de/">
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://flatly-berlin.de/">
     <meta property="og:title" content="Berlin Apartment Bot | Automatic Flat Finder">
     <meta property="og:description" content="Automatic apartment finder for Berlin. Get instant Telegram notifications when new flats match your criteria.">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="de_DE">
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://flatly-berlin.de/">
     <meta property="twitter:title" content="Berlin Apartment Bot - Automatic Flat Finder">
     <meta property="twitter:description" content="Never miss a flat again. Automatic Berlin apartment finder with instant Telegram notifications.">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
-
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Schema.org - Software Application (English/German combined) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -70,7 +51,6 @@
     }
     </script>
 
-    <!-- Schema.org - FAQ Page (Critical for Rich Snippets) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -112,7 +92,6 @@
     }
     </script>
 
-    <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -126,10 +105,8 @@
     }
     </script>
 
-    <!-- JavaScript: Dynamic Canonical + Language Handling -->
     <script>
     (function() {
-        // Set canonical based on ?lang parameter
         const urlParams = new URLSearchParams(window.location.search);
         const lang = urlParams.get('lang');
         const canonicalEl = document.getElementById('dynamic-canonical');
@@ -143,7 +120,6 @@
             document.body.setAttribute('data-lang', 'en');
         }
 
-        // Optional: Update OG/Twitter URLs dynamically too
         const currentUrl = canonicalEl.href;
         document.querySelector('meta[property="og:url"]')?.setAttribute('content', currentUrl);
         document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', currentUrl);
@@ -181,14 +157,30 @@
                 <span class="logo-text">Flatly</span>
             </div>
             <div class="nav-controls">
+                <a href="explore.html" class="nav-link explore-link" target="_self" aria-label="Explore Apartments">
+                    <span class="explore-text-desktop">
+                        <span class="lang-en">Explore</span>
+                        <span class="lang-de">Erkunden</span>
+                    </span>
+                    <svg class="explore-icon-mobile" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.3-4.3"></path>
+                    </svg>
+                </a>
                 <button class="lang-switcher" id="langToggle" aria-label="Switch language">
                     <span class="lang-option active" data-lang="en">EN</span>
                     <span class="lang-divider">/</span>
                     <span class="lang-option" data-lang="de">DE</span>
                 </button>
                 <a href="https://t.me/flatly_berlin_bot" class="btn btn-small" target="_blank" rel="noopener noreferrer">
-                    <span class="lang-en">Open Bot</span>
-                    <span class="lang-de">Bot Öffnen</span>
+                    <span class="bot-text-desktop">
+                        <span class="lang-en">Open Bot</span>
+                        <span class="lang-de">Bot Öffnen</span>
+                    </span>
+                    <span class="bot-text-mobile">
+                        <span class="lang-en">Open</span>
+                        <span class="lang-de">Bot</span>
+                    </span>
                 </a>
             </div>
         </div>
@@ -263,7 +255,6 @@
     </header>
 
     <main role="main">
-        <!-- Stats Section -->
         <section class="stats-section" id="stats" aria-label="Berlin apartment bot statistics">
             <div class="container">
                 <div class="stats-grid">
@@ -399,6 +390,8 @@
                 </div>
             </div>
         </section>
+
+        
 
         <section class="faq" id="faq">
             <div class="container">
@@ -552,7 +545,6 @@
     </footer>
 
     <script>
-        // Daily Stats Generator - Based on date for consistency
         (function() {
             function getDailyRandom(seed, min, max) {
                 let hash = 0;
@@ -583,7 +575,6 @@
             });
         })();
 
-        // Language Detection and Switching
         (function() {
             const supportedLanguages = ['en', 'de'];
             const defaultLang = 'en';
@@ -639,5 +630,9 @@
             });
         })();
     </script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="map.js" defer></script>
 </body>
 </html>
