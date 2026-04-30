@@ -69,17 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!apt.lat || !apt.lng) return;
       const isRent = apt.type === 'rent';
       const color = isRent ? '#4fc9c8' : '#f59e0b';
-
-      L.circleMarker([apt.lat, apt.lng], {
-        radius: 7, fillColor: color, color: '#fff', weight: 2, fillOpacity: 0.9
-      })
       const districtLine = apt.district ? `<br>${apt.district}` : '';
+      const applyLabel = document.body.dataset.lang === 'de' ? 'Bewerben' : 'Apply';
       L.circleMarker([apt.lat, apt.lng], {
         radius: 7, fillColor: color, color: '#fff', weight: 2, fillOpacity: 0.9
       })
       .bindPopup(`<div style="font-size:14px; line-height:1.5; text-align:center;">
         ${apt.rooms} Zimmer • ${apt.size} m²${districtLine}<br>
-        <b>€${apt.price.toLocaleString()}${isRent ? '/mo' : ''}</b>
+        <b>€${apt.price.toLocaleString()}${isRent ? '/mo' : ''}</b><br>
+        <a href="https://t.me/flatly_berlin_bot" target="_blank" rel="noopener noreferrer" data-umami-event="Open Bot" class="popup-apply-btn">${applyLabel}</a>
       </div>`)
       .addTo(markersLayer);
     });
@@ -103,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     update('filter-type', [['All','Alle'],['Rent','Miete'],['Sale','Kauf']]);
     update('filter-rooms', [['Any','Egal'],['1+','1+'],['2+','2+'],['3+','3+'],['4+','4+']]);
     update('filter-size', [['Any','Egal'],['30+','30+'],['50+','50+'],['70+','70+'],['100+','100+']]);
+    const applyLabel = isDe ? 'Bewerben' : 'Apply';
+    document.querySelectorAll('.leaflet-popup .popup-apply-btn').forEach(btn => btn.textContent = applyLabel);
   }
 
   function bindEvents() {

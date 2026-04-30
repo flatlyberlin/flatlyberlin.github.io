@@ -974,6 +974,10 @@ body[data-lang="de"] .schema-lang-en {
     display: none;
 }
 
+body[data-lang="en"] .lang-de {
+    display: none !important;
+}
+
 @media (max-width: 480px) {
     .lang-switcher {
         padding: 4px 8px;
@@ -1044,10 +1048,27 @@ body[data-lang="de"] .schema-lang-en {
   .control-group { min-width: 120px; }
 }
 
+.leaflet-container .popup-apply-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 20px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 0.2s ease;
+}
+
+.leaflet-container .popup-apply-btn:hover {
+  background: var(--accent-hover);
+}
+
 #search-filters {
   height: 44px;
 }
-/* Navigation & subpage utilities */
+
 .nav-link {
     color: var(--text-secondary);
     text-decoration: none;
@@ -1072,7 +1093,6 @@ body[data-lang="de"] .schema-lang-en {
     transform: none;
 }
 
-/* Mobile nav optimizations */
 .explore-icon-mobile {
     display: none;
     vertical-align: middle;
