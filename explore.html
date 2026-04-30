@@ -9,7 +9,7 @@
     <meta name="keywords" content="berlin apartment map, berlin flat explorer, wohnungen berlin karte, apartment search map berlin">
     <meta name="author" content="Flatly Berlin">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://flatly-berlin.de/explore.html">
+    <link rel="canonical" href="https://flatly-berlin.de/explore.html" id="dynamic-canonical">
     <link rel="alternate" hreflang="en" href="https://flatly-berlin.de/explore.html?lang=en">
     <link rel="alternate" hreflang="de" href="https://flatly-berlin.de/explore.html?lang=de">
     <link rel="alternate" hreflang="x-default" href="https://flatly-berlin.de/explore.html">
@@ -17,12 +17,14 @@
     <meta property="og:url" content="https://flatly-berlin.de/explore.html">
     <meta property="og:title" content="Explore Berlin Apartments | Flatly Berlin">
     <meta property="og:description" content="Explore current apartment listings in Berlin on the map.">
+    <meta property="og:image" content="https://flatly-berlin.de/icon.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://flatly-berlin.de/explore.html">
     <meta property="twitter:title" content="Explore Berlin Apartments | Flatly Berlin">
     <meta property="twitter:description" content="Explore current apartment listings in Berlin on the map.">
+    <meta property="twitter:image" content="https://flatly-berlin.de/icon.png">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
     <link rel="stylesheet" href="styles.css">
@@ -50,14 +52,18 @@
     (function() {
         const urlParams = new URLSearchParams(window.location.search);
         const lang = urlParams.get('lang');
+        const canonicalEl = document.getElementById('dynamic-canonical');
 
         if (lang === 'en' || lang === 'de') {
             document.documentElement.setAttribute('lang', lang);
-            document.body.setAttribute('data-lang', lang);
+            if (canonicalEl) canonicalEl.href = `https://flatly-berlin.de/explore.html?lang=${lang}`;
         } else {
             document.documentElement.setAttribute('lang', 'en');
-            document.body.setAttribute('data-lang', 'en');
         }
+
+        const currentUrl = canonicalEl ? canonicalEl.href : window.location.href;
+        document.querySelector('meta[property="og:url"]')?.setAttribute('content', currentUrl);
+        document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', currentUrl);
     })();
     </script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="c931086d-f08e-4237-811d-992dabc7b5e7"></script>
@@ -91,7 +97,7 @@
                 <span class="logo-text">Flatly</span>
             </a>
             <div class="nav-controls">
-                <button class="lang-switcher" id="langToggle" aria-label="Switch language">
+                <button type="button" class="lang-switcher" id="langToggle" aria-label="Switch language">
                     <span class="lang-option active" data-lang="en">EN</span>
                     <span class="lang-divider">/</span>
                     <span class="lang-option" data-lang="de">DE</span>
@@ -150,7 +156,7 @@
                     <label id="lbl-budget">Max Budget (€)</label>
                     <input type="number" id="filter-budget" placeholder="1500">
                 </div>
-                <button class="btn btn-small" id="search-filters">Search</button>
+                <button type="button" class="btn btn-small" id="search-filters">Search</button>
                 </div>
                 <div id="map" class="map-container"></div>
             </div>
@@ -205,7 +211,6 @@
                 for (let i = 0; i < seed.length; i++) {
                     const char = seed.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
                 }
                 const normalized = Math.abs(hash) / 2147483647;
                 return Math.floor(normalized * (max - min + 1)) + min;
@@ -257,13 +262,6 @@
                 document.documentElement.lang = lang;
                 document.body.setAttribute('data-lang', lang);
 
-                document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
-                    el.style.display = 'none';
-                });
-                document.querySelectorAll('.lang-' + lang).forEach(el => {
-                    el.style.display = 'inline';
-                });
-
                 document.querySelectorAll('.lang-option').forEach(opt => {
                     opt.classList.toggle('active', opt.dataset.lang === lang);
                 });
@@ -273,6 +271,13 @@
                 const url = new URL(window.location);
                 url.searchParams.set('lang', lang);
                 window.history.replaceState({}, '', url);
+
+                const canonicalEl = document.getElementById('dynamic-canonical');
+                if (canonicalEl) {
+                    canonicalEl.href = url.toString();
+                }
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url.toString());
+                document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', url.toString());
             }
 
             const currentLang = getCurrentLanguage();

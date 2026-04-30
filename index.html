@@ -17,12 +17,14 @@
     <meta property="og:url" content="https://flatly-berlin.de/">
     <meta property="og:title" content="Berlin Apartment Bot | Automatic Flat Finder">
     <meta property="og:description" content="Automatic apartment finder for Berlin. Get instant Telegram notifications when new flats match your criteria.">
+    <meta property="og:image" content="https://flatly-berlin.de/icon.png">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="de_DE">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://flatly-berlin.de/">
     <meta property="twitter:title" content="Berlin Apartment Bot - Automatic Flat Finder">
     <meta property="twitter:description" content="Never miss a flat again. Automatic Berlin apartment finder with instant Telegram notifications.">
+    <meta property="twitter:image" content="https://flatly-berlin.de/icon.png">
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
     <link rel="stylesheet" href="styles.css">
@@ -114,10 +116,8 @@
         if (lang === 'en' || lang === 'de') {
             canonicalEl.href = `https://flatly-berlin.de/?lang=${lang}`;
             document.documentElement.setAttribute('lang', lang);
-            document.body.setAttribute('data-lang', lang);
         } else {
             document.documentElement.setAttribute('lang', 'en');
-            document.body.setAttribute('data-lang', 'en');
         }
 
         const currentUrl = canonicalEl.href;
@@ -157,7 +157,7 @@
                 <span class="logo-text">Flatly</span>
             </div>
             <div class="nav-controls">
-                <a href="explore.html" class="nav-link explore-link" target="_self" aria-label="Explore Apartments">
+                <a href="explore.html" class="nav-link explore-link" target="_self">
                     <span class="explore-text-desktop">
                         <span class="lang-en">Explore</span>
                         <span class="lang-de">Erkunden</span>
@@ -167,7 +167,7 @@
                         <path d="m21 21-4.3-4.3"></path>
                     </svg>
                 </a>
-                <button class="lang-switcher" id="langToggle" aria-label="Switch language">
+                <button type="button" class="lang-switcher" id="langToggle" aria-label="Switch language">
                     <span class="lang-option active" data-lang="en">EN</span>
                     <span class="lang-divider">/</span>
                     <span class="lang-option" data-lang="de">DE</span>
@@ -551,7 +551,6 @@
                 for (let i = 0; i < seed.length; i++) {
                     const char = seed.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
                 }
                 const normalized = Math.abs(hash) / 2147483647;
                 return Math.floor(normalized * (max - min + 1)) + min;
@@ -603,13 +602,6 @@
                 document.documentElement.lang = lang;
                 document.body.setAttribute('data-lang', lang);
 
-                document.querySelectorAll('.lang-en, .lang-de').forEach(el => {
-                    el.style.display = 'none';
-                });
-                document.querySelectorAll('.lang-' + lang).forEach(el => {
-                    el.style.display = 'inline';
-                });
-
                 document.querySelectorAll('.lang-option').forEach(opt => {
                     opt.classList.toggle('active', opt.dataset.lang === lang);
                 });
@@ -619,6 +611,13 @@
                 const url = new URL(window.location);
                 url.searchParams.set('lang', lang);
                 window.history.replaceState({}, '', url);
+
+                const canonicalEl = document.getElementById('dynamic-canonical');
+                if (canonicalEl) {
+                    canonicalEl.href = url.toString();
+                }
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url.toString());
+                document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', url.toString());
             }
 
             const currentLang = getCurrentLanguage();
@@ -630,9 +629,5 @@
             });
         })();
     </script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="map.js" defer></script>
 </body>
 </html>

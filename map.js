@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   let map, markersLayer, supabase;
+  let debounceTimer;
 
   const els = {
     type: document.getElementById('filter-type'),
@@ -105,10 +106,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.leaflet-popup .popup-apply-btn').forEach(btn => btn.textContent = applyLabel);
   }
 
+  function debounce(fn, delay) {
+    return function(...args) {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
   function bindEvents() {
     els.search?.addEventListener('click', loadApartments);
 
-    map?.on('moveend', loadApartments);
+    const debouncedLoad = debounce(() => {
+      if (map._popup && map.hasLayer(map._popup)) return;
+      loadApartments();
+    }, 300);
+
+    map?.on('moveend', debouncedLoad);
     new MutationObserver(syncLanguage).observe(document.body, { attributes: true, attributeFilter: ['data-lang'] });
   }
 
