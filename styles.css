@@ -1116,3 +1116,12 @@ body[data-lang="en"] .lang-de {
         display: inline;
     }
 }
+
+.control-group input[type="number"] {
+  -moz-appearance: textfield;
+}
+.control-group input[type="number"]::-webkit-outer-spin-button,
+.control-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

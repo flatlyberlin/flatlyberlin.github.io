@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   let map, markersLayer, supabase;
   let debounceTimer;
-
+  let currentApartments = [];
+  
   const els = {
     type: document.getElementById('filter-type'),
     rooms: document.getElementById('filter-rooms'),
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       attributionControl: false,
       scrollWheelZoom: true
     }).setView([52.5200, 13.4050], 11);
-
+    
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       subdomains: 'abcd',
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadApartments() {
     if (!supabase) supabase = initSupabase();
     if (!markersLayer) return;
-
+    
     const bounds = map.getBounds();
     const type = els.type.value;
     const minRooms = parseInt(els.rooms.value) || 0;
@@ -57,26 +58,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const { data, error } = await query;
     if (error) return console.error('Supabase:', error.message);
-    if (!data || data.length === 0) return renderMarkers([]);
-
-    renderMarkers(data);
+    
+    currentApartments = data || [];
+    renderMarkers(currentApartments);
   }
 
   function renderMarkers(apartments) {
     if (!markersLayer) return;
     markersLayer.clearLayers();
+    
+    const isDe = document.body.dataset.lang === 'de';
+    const roomLabel = isDe ? 'Zimmer' : 'Rooms';
+    const applyLabel = isDe ? 'Bewerben' : 'Apply';
 
     apartments.forEach(apt => {
       if (!apt.lat || !apt.lng) return;
       const isRent = apt.type === 'rent';
       const color = isRent ? '#4fc9c8' : '#f59e0b';
       const districtLine = apt.district ? `<br>${apt.district}` : '';
-      const applyLabel = document.body.dataset.lang === 'de' ? 'Bewerben' : 'Apply';
+      
       L.circleMarker([apt.lat, apt.lng], {
         radius: 7, fillColor: color, color: '#fff', weight: 2, fillOpacity: 0.9
       })
       .bindPopup(`<div style="font-size:14px; line-height:1.5; text-align:center;">
-        ${apt.rooms} Zimmer • ${apt.size} m²${districtLine}<br>
+        ${apt.rooms} ${roomLabel} • ${apt.size} m²${districtLine}<br>
         <b>€${apt.price.toLocaleString()}${isRent ? '/mo' : ''}</b><br>
         <a href="https://t.me/flatly_berlin_bot" target="_blank" rel="noopener noreferrer" data-umami-event="Open Bot" class="popup-apply-btn">${applyLabel}</a>
       </div>`)
@@ -87,12 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function syncLanguage() {
     const isDe = document.body.dataset.lang === 'de';
     const t = (en, de) => isDe ? de : en;
-
+    
     document.getElementById('lbl-type').textContent = t('Type', 'Typ');
     document.getElementById('lbl-rooms').textContent = t('Min Rooms', 'Min. Zimmer');
-    document.getElementById('lbl-size').textContent = t('Size (m²)', 'Größe (m²)');
+    document.getElementById('lbl-size').textContent = t('Min Size (m²)', 'Min. Größe (m²)');
     document.getElementById('lbl-budget').textContent = t('Max Budget (€)', 'Max. Budget (€)');
     els.search.textContent = t('Search', 'Suchen');
+    els.size.placeholder = isDe ? 'z.B. 50' : 'e.g. 50';
+    els.budget.placeholder = isDe ? 'Beliebig' : 'Any';
 
     const update = (id, pairs) => {
       document.getElementById(id).querySelectorAll('option').forEach((opt, i) => {
@@ -101,9 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     update('filter-type', [['All','Alle'],['Rent','Miete'],['Sale','Kauf']]);
     update('filter-rooms', [['Any','Egal'],['1+','1+'],['2+','2+'],['3+','3+'],['4+','4+']]);
-    update('filter-size', [['Any','Egal'],['30+','30+'],['50+','50+'],['70+','70+'],['100+','100+']]);
-    const applyLabel = isDe ? 'Bewerben' : 'Apply';
-    document.querySelectorAll('.leaflet-popup .popup-apply-btn').forEach(btn => btn.textContent = applyLabel);
+
+    if (currentApartments.length > 0) {
+      renderMarkers(currentApartments);
+    }
   }
 
   function debounce(fn, delay) {
@@ -115,7 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function bindEvents() {
     els.search?.addEventListener('click', loadApartments);
-
     const debouncedLoad = debounce(() => {
       if (map._popup && map.hasLayer(map._popup)) return;
       loadApartments();

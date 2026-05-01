@@ -129,7 +129,7 @@
                 </h2>
                 <div class="explorer-controls">
                 <div class="control-group">
-                    <label id="lbl-type">Type</label>
+                    <label id="lbl-type" for="filter-type">Type</label>
                     <select id="filter-type">
                     <option value="all">All</option>
                     <option value="rent">Rent</option>
@@ -137,9 +137,9 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label id="lbl-rooms">Min Rooms</label>
+                    <label id="lbl-rooms" for="filter-rooms">Min Rooms</label>
                     <select id="filter-rooms">
-                    <option value="any">Any</option>
+                    <option value="">Any</option>
                     <option value="1">1+</option>
                     <option value="2">2+</option>
                     <option value="3">3+</option>
@@ -147,21 +147,15 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label id="lbl-size">Size (m²)</label>
-                    <select id="filter-size">
-                    <option value="any">Any</option>
-                    <option value="30">30+</option>
-                    <option value="50">50+</option>
-                    <option value="70">70+</option>
-                    <option value="100">100+</option>
-                    </select>
+                    <label id="lbl-size" for="filter-size">Size (m²)</label>
+                    <input type="number" id="filter-size" placeholder="e.g. 50" min="0" step="1">
                 </div>
                 <div class="control-group">
-                    <label id="lbl-budget">Max Budget (€)</label>
-                    <input type="number" id="filter-budget" placeholder="1500">
+                    <label id="lbl-budget" for="filter-budget">Max Budget (€)</label>
+                    <input type="number" id="filter-budget" placeholder="Any" min="0" step="100">
                 </div>
                 <button type="button" class="btn btn-small" id="search-filters">Search</button>
-                </div>
+            </div>
                 <div id="map" class="map-container"></div>
             </div>
         </section>
