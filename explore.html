@@ -123,14 +123,49 @@
                 <span class="lang-en">Explore Apartments</span>
                 <span class="lang-de">Wohnungen erkunden</span>
                 </h2>
+                <div class="district-chips" id="districtChips">
+                    <span class="district-label">
+                        <span class="lang-en">Districts:</span>
+                        <span class="lang-de">Bezirke:</span>
+                    </span>
+                    <button type="button" class="district-chip active" data-district="all">
+                        <span class="lang-en">All Berlin</span>
+                        <span class="lang-de">Ganz Berlin</span>
+                    </button>
+                    <button type="button" class="district-chip" data-district="Friedrichshain">Friedrichshain</button>
+                    <button type="button" class="district-chip" data-district="Kreuzberg">Kreuzberg</button>
+                    <button type="button" class="district-chip" data-district="Charlottenburg-Wilmersdorf">Charlottenburg-Wilmersdorf</button>
+                    <button type="button" class="district-chip" data-district="Marzahn-Hellersdorf">Marzahn-Hellersdorf</button>
+                    <button type="button" class="district-chip" data-district="Steglitz-Zehlendorf">Steglitz-Zehlendorf</button>
+                    <button type="button" class="district-chip" data-district="Schöneberg">Schöneberg</button>
+                    <button type="button" class="district-chip" data-district="Tempelhof-Nord">Tempelhof-Nord</button>
+                    <button type="button" class="district-chip" data-district="Tempelhof-Süd">Tempelhof-Süd</button>
+                    <button type="button" class="district-chip" data-district="Mitte">Mitte</button>
+                    <button type="button" class="district-chip" data-district="Wedding">Wedding</button>
+                    <button type="button" class="district-chip" data-district="Neukölln-Nord">Neukölln-Nord</button>
+                    <button type="button" class="district-chip" data-district="Treptow-Köpenick">Treptow-Köpenick</button>
+                    <button type="button" class="district-chip" data-district="Prenzlauer-Berg">Prenzlauer-Berg</button>
+                    <button type="button" class="district-chip" data-district="Neukölln-Süd">Neukölln-Süd</button>
+                    <button type="button" class="district-chip" data-district="Pankow">Pankow</button>
+                    <button type="button" class="district-chip" data-district="Lichtenberg">Lichtenberg</button>
+                    <button type="button" class="district-chip" data-district="Reinickendorf">Reinickendorf</button>
+                    <button type="button" class="district-chip" data-district="Spandau">Spandau</button>
+                </div>
+
                 <div class="explorer-controls">
                 <div class="control-group">
                     <label id="lbl-type" for="filter-type">Type</label>
-                    <select id="filter-type">
-                    <option value="all">All</option>
-                    <option value="rent">Rent</option>
-                    <option value="sale">Sale</option>
-                    </select>
+                    <input type="hidden" id="filter-type" value="rent">
+                    <div class="type-toggle" role="group" aria-label="Listing type">
+                        <button type="button" class="type-option active" data-value="rent">
+                            <span class="lang-en">Rent</span>
+                            <span class="lang-de">Miete</span>
+                        </button>
+                        <button type="button" class="type-option" data-value="sale">
+                            <span class="lang-en">Sale</span>
+                            <span class="lang-de">Kauf</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="control-group">
                     <label id="lbl-rooms" for="filter-rooms">Min Rooms</label>
@@ -152,7 +187,53 @@
                 </div>
                 <button type="button" class="btn btn-small" id="search-filters">Search</button>
             </div>
+                <div class="probability-panel" id="probabilityPanel" style="display:none;">
+                    <div class="probability-header">
+                        <div class="probability-score" id="probabilityScore">
+                            <span class="score-value" id="scoreValue">--</span>
+                            <span class="score-percent">%</span>
+                        </div>
+                        <div class="probability-info">
+                            <h4 id="probabilityTitle">
+                                <span class="lang-en">Your Chance Score</span>
+                                <span class="lang-de">Dein Chance-Score</span>
+                            </h4>
+                            <p id="probabilityText">
+                                <span class="lang-en">Click Search to see your estimated success probability based on current Berlin market data (2026)</span>
+                                <span class="lang-de">Klicke auf Suchen, um deine geschätzte Erfolgswahrscheinlichkeit basierend auf aktuellen Berliner Marktdaten (2026) zu sehen</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="probability-bar">
+                        <div class="probability-fill" id="probabilityFill"></div>
+                    </div>
+                </div>
                 <div id="map" class="map-container"></div>
+                <div class="alert-cta-banner" id="alertCtaBanner" style="display:none;">
+                    <div class="alert-cta-content">
+                        <div class="alert-cta-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                                <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                            </svg>
+                        </div>
+                        <div class="alert-cta-text">
+                            <strong id="ctaTitle">
+                                <span class="lang-en">Get instant alerts for this search</span>
+                                <span class="lang-de">Sofortige Alerts für diese Suche</span>
+                            </strong>
+                            <span id="ctaSubtitle">
+                                <span class="lang-en">Never miss a matching apartment again</span>
+                                <span class="lang-de">Verpasse nie wieder eine passende Wohnung</span>
+                            </span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/flatly_berlin_bot?start=default" onclick="window.location='tg://resolve?domain=flatly_berlin_bot&start=default'; setTimeout(()=>window.location='https://t.me/flatly_berlin_bot?start=default', 500); return false;" class="btn btn-primary alert-cta-btn" rel="noopener noreferrer" data-umami-event="Explore Alert CTA">
+                        <span class="lang-en">Open Bot</span>
+                        <span class="lang-de">Bot Öffnen</span>
+                        <span class="arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
             </div>
         </section>
     </main>

@@ -1129,3 +1129,322 @@ body[data-lang="en"] .lang-de {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.district-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.district-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.district-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.district-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(79, 201, 200, 0.15);
+}
+
+.district-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 2px 8px rgba(79, 201, 200, 0.3);
+}
+
+.district-chip.active:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.probability-panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.probability-panel.active {
+  opacity: 1;
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(79, 201, 200, 0.15);
+}
+
+.probability-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.probability-score {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.score-value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  min-width: 80px;
+  text-align: center;
+}
+
+.score-percent {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.probability-info h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
+
+.probability-info p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.probability-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.probability-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.1s linear, background 0.3s ease;
+  background: linear-gradient(90deg, #e5e7eb, #e5e7eb);
+}
+
+.alert-cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: white;
+  color: var(--text-primary);
+  padding: 20px 28px;
+  border-radius: 16px;
+  margin-top: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.alert-cta-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.alert-cta-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-hover);
+  flex-shrink: 0;
+}
+
+.alert-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alert-cta-text strong {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.alert-cta-text span {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.alert-cta-btn {
+  flex-shrink: 0;
+}
+
+.alert-cta-btn:hover {
+  background: var(--accent-hover) !important;
+}
+
+@media (max-width: 768px) {
+  .district-chips {
+    gap: 6px;
+  }
+
+  .district-chip {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+
+  .probability-panel {
+    padding: 18px 20px;
+  }
+
+  .probability-header {
+    gap: 14px;
+  }
+
+  .score-value {
+    font-size: 2.5rem;
+    min-width: 65px;
+  }
+
+  .probability-info h4 {
+    font-size: 1rem;
+  }
+
+  .alert-cta-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .alert-cta-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .alert-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .district-chips {
+    gap: 5px;
+  }
+
+  .district-chip {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+
+  .district-label {
+    font-size: 0.75rem;
+  }
+
+  .score-value {
+    font-size: 2rem;
+    min-width: 55px;
+  }
+
+  .probability-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .probability-info p {
+    font-size: 0.8rem;
+  }
+}
+
+.type-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.type-option {
+  flex: 1;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.type-option:hover {
+  color: var(--text-primary);
+}
+
+.type-option.active {
+  background: white;
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .type-toggle {
+    height: 40px;
+  }
+
+  .type-option {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .type-toggle {
+    height: 38px;
+  }
+
+  .type-option {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
