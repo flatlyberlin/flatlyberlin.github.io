@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }).bindPopup(`<div style="font-size:14px;line-height:1.5;text-align:center;">
         ${apt.rooms} ${roomLabel} • ${apt.size} m²${districtLine}<br>
         <b>€${apt.price.toLocaleString()}${isRent ? '/mo' : ''}</b><br>
-        <a href="https://t.me/flatly_berlin_bot" target="_blank" rel="noopener noreferrer" data-umami-event="Open Bot" class="popup-apply-btn">${applyLabel}</a>
+        <a href="https://t.me/flatly_berlin_bot?start=default" onclick="window.location='tg://resolve?domain=flatly_berlin_bot&start=default'; setTimeout(()=>window.location='https://t.me/flatly_berlin_bot?start=default', 500); return false;" rel="noopener noreferrer" data-umami-event="Open Bot" class="popup-apply-btn">${applyLabel}</a>
       </div>`);
       
       markersToAdd.push(marker);
